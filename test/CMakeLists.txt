@@ -1,16 +1,16 @@
 if (NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Debug)
+	set(CMAKE_BUILD_TYPE Debug)
 endif()
 message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
 message(STATUS "CMAKE_CXX_COMPILER_ID: ${CMAKE_CXX_COMPILER_ID}")
 if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
-  add_compile_options(-stdlib=libc++)
+	add_compile_options(-stdlib=libc++)
 else()
-  add_compile_options(-Wlogical-op)
-  add_compile_options(-Wnoexcept)
-  add_compile_options(-Wstrict-null-sentinel)
-  add_compile_options(-Wuseless-cast)
+	add_compile_options(-Wlogical-op)
+	add_compile_options(-Wnoexcept)
+	add_compile_options(-Wstrict-null-sentinel)
+	add_compile_options(-Wuseless-cast)
 endif()
 add_compile_options(-Wall -Wextra -Wpedantic)
 add_compile_options(-Wcast-align -Wcast-qual)
@@ -30,14 +30,17 @@ add_compile_options(-Wstrict-overflow=5)
 add_compile_options(-Wswitch-default)
 add_compile_options(-Wundef)
 
+add_custom_target(all_tests)
+
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} source_files)
 foreach(src IN LISTS source_files)
-  get_filename_component(name_we ${src} NAME_WE)
-  add_executable(test-${name_we} ${src})
-  target_link_libraries(test-${name_we} ${PROJECT_NAME}::${PROJECT_NAME})
-  set_target_properties(test-${name_we} PROPERTIES
-    CXX_STANDARD_REQUIRED ON
-    CXX_EXTENSIONS OFF
-  )
-  add_test(NAME ${name_we} COMMAND $<TARGET_FILE:test-${name_we}>)
+	get_filename_component(name_we ${src} NAME_WE)
+	add_executable(test-${name_we} ${src})
+	set_target_properties(test-${name_we} PROPERTIES
+		CXX_STANDARD_REQUIRED ON
+		CXX_EXTENSIONS OFF
+	)
+	add_test(NAME ${name_we} COMMAND $<TARGET_FILE:test-${name_we}>)
+	add_dependencies(all_tests test-${name_we})
 endforeach()
+
