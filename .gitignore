@@ -3,8 +3,8 @@
 /issues
 /examples/*
 !/examples/*.cpp
-!/examples/Makefile
 !/examples/runall
+!/examples/CMakeLists.txt
 /docs/*
 !/docs/doxyfile
 .settings

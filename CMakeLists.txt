@@ -13,10 +13,10 @@ message(STATUS "CMAKE_CXX_COMPILER_ID: ${CMAKE_CXX_COMPILER_ID}")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-include_directories(include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-add_subdirectory(examples)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples)
 
 enable_testing()
-add_subdirectory(test)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test)
 
