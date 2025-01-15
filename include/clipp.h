@@ -3835,7 +3835,7 @@ greedy(parameter p) {
 }
 
 inline parameter
-operator ! (parameter p) {
+operator ! (const parameter& p) {
     return greedy(p);
 }
 
@@ -6851,7 +6851,7 @@ private:
  *****************************************************************************/
 inline man_page
 make_man_page(const group& cli,
-              doc_string progname = "",
+              const doc_string& progname = "",
               const doc_formatting& fmt = doc_formatting{})
 {
     man_page man;
